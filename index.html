@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordie - Strategic Word Puzzle Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Wordie</h1>
+        <div class="nav-buttons">
+            <button class="mini-games-btn">Mini Games</button>
+        </div>
+    </header>
+
+    <main class="game-container">
+        <div class="hints-panel">
+            <h3>Hints</h3>
+            <div class="hints-box">
+                <div class="hint-item">💡 First letter is a vowel</div>
+                <div class="hint-item">🔤 Contains the letter 'R'</div>
+                <div class="hint-item">📝 5-letter word</div>
+            </div>
+            <div class="hints-count">Hints Available: 3</div>
+        </div>
+
+        <div class="game-board">
+            <div class="word-grid">
+                <div class="word-row">
+                    <div class="letter-box">W</div>
+                    <div class="letter-box">O</div>
+                    <div class="letter-box">R</div>
+                    <div class="letter-box">D</div>
+                    <div class="letter-box">S</div>
+                </div>
+                <div class="word-row">
+                    <div class="letter-box">T</div>
+                    <div class="letter-box">R</div>
+                    <div class="letter-box">I</div>
+                    <div class="letter-box">A</div>
+                    <div class="letter-box">L</div>
+                </div>
+                <div class="word-row">
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                </div>
+                <div class="word-row">
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                </div>
+                <div class="word-row">
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                </div>
+                <div class="word-row">
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                </div>
+            </div>
+
+            <div class="keyboard">
+                <div class="keyboard-row">
+                    <button class="key">Q</button>
+                    <button class="key available">W</button>
+                    <button class="key">E</button>
+                    <button class="key wrong-position">R</button>
+                    <button class="key">T</button>
+                    <button class="key">Y</button>
+                    <button class="key">U</button>
+                    <button class="key available">I</button>
+                    <button class="key correct-position">O</button>
+                    <button class="key">P</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="key available">A</button>
+                    <button class="key correct-position">S</button>
+                    <button class="key correct-position">D</button>
+                    <button class="key">F</button>
+                    <button class="key">G</button>
+                    <button class="key">H</button>
+                    <button class="key">J</button>
+                    <button class="key">K</button>
+                    <button class="key wrong-position">L</button>
+                </div>
+                <div class="keyboard-row">
+                    <button class="key special">ENTER</button>
+                    <button class="key">Z</button>
+                    <button class="key">X</button>
+                    <button class="key">C</button>
+                    <button class="key">V</button>
+                    <button class="key">B</button>
+                    <button class="key">N</button>
+                    <button class="key">M</button>
+                    <button class="key special">⌫</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
