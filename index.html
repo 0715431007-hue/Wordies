@@ -18,9 +18,15 @@
         <div class="hints-panel">
             <h3>Hints</h3>
             <div class="hints-box">
-                <div class="hint-item">💡 First letter is a vowel</div>
-                <div class="hint-item">🔤 Contains the letter 'R'</div>
-                <div class="hint-item">📝 5-letter word</div>
+                <div class="hint-item">
+                    <button id="vowelHint" onclick="showPopup()">💡 First letter is a vowel</button>
+                </div>
+                <div class="hint-item">
+                    <button>🔤 Contains the letter 'R'</button>
+                </div>
+                <div class="hint-item">
+                    <button>📝 5-letter word</button>
+            </div>
             </div>
             <div class="hints-count">Hints Available: 3</div>
         </div>
@@ -28,18 +34,18 @@
         <div class="game-board">
             <div class="word-grid">
                 <div class="word-row">
-                    <div class="letter-box">W</div>
-                    <div class="letter-box">O</div>
-                    <div class="letter-box">R</div>
-                    <div class="letter-box">D</div>
-                    <div class="letter-box">S</div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
                 </div>
                 <div class="word-row">
-                    <div class="letter-box">T</div>
-                    <div class="letter-box">R</div>
-                    <div class="letter-box">I</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">L</div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
+                    <div class="letter-box"></div>
                 </div>
                 <div class="word-row">
                     <div class="letter-box"></div>
@@ -73,15 +79,15 @@
 
             <div class="keyboard">
                 <div class="keyboard-row">
-                    <button class="key">Q</button>
-                    <button class="key available">W</button>
-                    <button class="key">E</button>
+                    <button class="key"></button>
+                    <button class="key available"></button>
+                    <button class="key"></button>
                     <button class="key wrong-position">R</button>
-                    <button class="key">T</button>
-                    <button class="key">Y</button>
-                    <button class="key">U</button>
-                    <button class="key available">I</button>
-                    <button class="key correct-position">O</button>
+                    <button class="key"></button>
+                    <button class="key"></button>
+                    <button class="key"></button>
+                    <button class="key available"></button>
+                    <button class="key correct-position"></button>
                     <button class="key">P</button>
                 </div>
                 <div class="keyboard-row">
@@ -108,6 +114,16 @@
                 </div>
             </div>
         </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" id="closeBtn">&times;</span>
+                <h3>Minigame</h3>
+                <div id="minigameArea">
+                    <p>Your minigame will appear here!</p>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="myscript.js"></script>
 </body>
 </html>
