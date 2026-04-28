@@ -58,16 +58,16 @@ closeButton.addEventListener("click", hidePopup);
 // Array of possible words
 let wordList = ["APPLE", "BEACH", "CRANE", "DREAM", "EAGLE", "FLAME", "GRAPE", "HORSE", "IMAGE", "JUICE"];
 
-// Function to pick random word
+
+// Game variables
+let secretWord = getRandomWord();
+let currentGuess = 0;
+let maxGuesses = 6;
+
 function getRandomWord() {
     let randomIndex = Math.floor(Math.random() * wordList.length);
     return wordList[randomIndex];
 }
-
-// Set the secret word when page loads
-let secretWord = getRandomWord();
-
-console.log("Secret word is:", secretWord); // Remove this later - just for testing!
 
 // Get input elements
 let guessInput = document.getElementById("guessInput");
@@ -76,16 +76,20 @@ let feedback = document.getElementById("feedback");
 
 function checkGuess() {
     let playerGuess = guessInput.value.toUpperCase();
+    currentGuess = currentGuess + 1;
     
     if (playerGuess === secretWord) {
-        feedback.innerText = "Correct! You won! The word was " + secretWord;
+        feedback.innerText = "Correct! You won in " + currentGuess + " guesses!";
+    } else if (currentGuess >= maxGuesses) {
+        feedback.innerText = "Game Over! The word was " + secretWord;
     } else {
-        feedback.innerText = "Try again! Not " + playerGuess;
+        let remaining = maxGuesses - currentGuess;
+        feedback.innerText = "Try again! " + remaining + " guesses left.";
     }
     
-    // Clear the input for next guess
     guessInput.value = "";
 }
 
 submitButton.addEventListener("click", checkGuess);
+
 

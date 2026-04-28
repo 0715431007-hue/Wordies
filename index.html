@@ -29,91 +29,91 @@
             </div>
             </div>
             <div class="hints-count">Hints Available: 3</div>
-        </div>
+            <div id="gameBoard">
+    <!-- 6 rows of 5 letter boxes each -->
+            <div class="guess-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+         <div class="letter-box"></div>
+     </div>
+        <div class="guess-row">
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+    </div>
+        <div class="guess-row">
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+    </div>
+    <div class="guess-row">
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+    </div>
+    <div class="guess-row">
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+    </div>
+    <div class="guess-row">
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+        <div class="letter-box"></div>
+    </div>
+</div>
 
-        <div class="game-board">
-            <div class="word-grid">
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="word-row">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-            </div>
+<!-- Keyboard -->
+<div id="keyboard">
+    <div class="keyboard-row">
+        <button class="key-btn">Q</button>
+        <button class="key-btn">W</button>
+        <button class="key-btn">E</button>
+        <button class="key-btn">R</button>
+        <button class="key-btn">T</button>
+        <button class="key-btn">Y</button>
+        <button class="key-btn">U</button>
+        <button class="key-btn">I</button>
+        <button class="key-btn">O</button>
+        <button class="key-btn">P</button>
+    </div>
+    <div class="keyboard-row">
+        <button class="key-btn">A</button>
+        <button class="key-btn">S</button>
+        <button class="key-btn">D</button>
+        <button class="key-btn">F</button>
+        <button class="key-btn">G</button>
+        <button class="key-btn">H</button>
+        <button class="key-btn">J</button>
+        <button class="key-btn">K</button>
+        <button class="key-btn">L</button>
+    </div>
+    <div class="keyboard-row">
+        <button class="key-btn">Z</button>
+        <button class="key-btn">X</button>
+        <button class="key-btn">C</button>
+        <button class="key-btn">V</button>
+        <button class="key-btn">B</button>
+        <button class="key-btn">N</button>
+        <button class="key-btn">M</button>
+        <button class="key-btn" id="enterBtn">ENTER</button>
+        <button class="key-btn" id="deleteBtn">DEL</button>
+    </div>
+</div>
 
-            <div class="keyboard">
-                <div class="keyboard-row">
-                    <button class="key"></button>
-                    <button class="key available"></button>
-                    <button class="key"></button>
-                    <button class="key wrong-position">R</button>
-                    <button class="key"></button>
-                    <button class="key"></button>
-                    <button class="key"></button>
-                    <button class="key available"></button>
-                    <button class="key correct-position"></button>
-                    <button class="key">P</button>
-                </div>
-                <div class="keyboard-row">
-                    <button class="key available">A</button>
-                    <button class="key correct-position">S</button>
-                    <button class="key correct-position">D</button>
-                    <button class="key">F</button>
-                    <button class="key">G</button>
-                    <button class="key">H</button>
-                    <button class="key">J</button>
-                    <button class="key">K</button>
-                    <button class="key wrong-position">L</button>
-                </div>
-                <div class="keyboard-row">
-                    <button class="key special">ENTER</button>
-                    <button class="key">Z</button>
-                    <button class="key">X</button>
-                    <button class="key">C</button>
-                    <button class="key">V</button>
-                    <button class="key">B</button>
-                    <button class="key">N</button>
-                    <button class="key">M</button>
-                    <button class="key special">⌫</button>
-                </div>
-            </div>
-        </div>
+
         <div id="popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn" id="closeBtn">&times;</span>
