@@ -307,7 +307,7 @@ header h1 {
     width: 1000px;
     flex-direction: row;
     margin-bottom: 25px;
-    margin-left: 500px;
+    margin-left: 490px;
     margin-top: -200px;
 }
 
@@ -331,6 +331,7 @@ header h1 {
 #keyboard {
     margin: 20px auto;
     width: 500px;
+    margin-left: 400px;
     
 }
 
