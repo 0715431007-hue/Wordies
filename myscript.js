@@ -12,6 +12,8 @@ let ConsonantButton = document.getElementById("consonantHint");
 let currentRow = 0;
 let currentPosition = 0; 
 
+let playerGuess = "";
+
 
 // Functions to show different minigames
 function showVowelGame() {
@@ -19,12 +21,12 @@ function showVowelGame() {
     popup.style.display = "block";
 }
 
-function showLetterRGame() {
+function showLetterGame() {
     minigameArea.innerText = "Letter minigame goes here!";
     popup.style.display = "block";
 }
 
-function showFiveLetterGame() {
+function showConsonantGame() {
     minigameArea.innerText = "Consonant minigame goes here!";
     popup.style.display = "block";
 }
@@ -35,8 +37,8 @@ function hidePopup() {
 
 // Connect each button to its own minigame
 vowelButton.addEventListener("click", showVowelGame);
-letterButton.addEventListener("click", showLetterRGame);
-ConsonantButton.addEventListener("click", showFiveLetterGame);
+letterButton.addEventListener("click", showLetterGame);
+ConsonantButton.addEventListener("click", showConsonantGame);
 
 // Connect close button
 closeButton.addEventListener("click", hidePopup);
@@ -81,42 +83,10 @@ function addLetter(letter) {
     }
 }
 
-function checkGuess() {
-    let allRows = document.querySelectorAll('.guess-row');
-    let currentRowBoxes = allRows[currentRow].querySelectorAll('.letter-box');
-    
-    // Get the player's guess
-    let playerGuess = "";
-    for (let i = 0; i < 5; i++) {
-        playerGuess = playerGuess + currentRowBoxes[i].innerText;
-    }
-    
-    console.log("Player guessed:", playerGuess);
-    console.log("Secret word:", secretWord);
-    
-    // Check each letter and add colors
-    for (let i = 0; i < 5; i++) {
-        let guessedLetter = playerGuess[i];
-        let correctLetter = secretWord[i];
-        if (guessedLetter === correctLetter) {
-            // Right letter, right place = GREEN
-            currentRowBoxes[i].style.backgroundColor = "lightGreen";
-            currentRowBoxes[i].style.color = "black";
-        } else if (secretWord.includes(guessedLetter)) {
-            // Right letter, wrong place = YELLOW
-            currentRowBoxes[i].style.backgroundColor = "yellow";
-            currentRowBoxes[i].style.color = "black";
-        } else {
-            // Letter not in word = GRAY
-            currentRowBoxes[i].style.backgroundColor = "gray";
-            currentRowBoxes[i].style.color = "black";
-        }
-    }
     // Check if they won
     if (playerGuess === secretWord) {
         alert("You won! The word was " + secretWord);
     }
-}
 
 // Function for ENTER button - now includes checking
 function submitGuess() {
@@ -171,4 +141,40 @@ for (let i = 0; i < allKeyButtons.length; i++) {
     }
 }
 
-console.log("Secret word:", secretWord);
+function checkGuess() {
+    let allRows = document.querySelectorAll('.guess-row');
+    let currentRowBoxes = allRows[currentRow].querySelectorAll('.letter-box');
+    
+    // Get the player's guess
+    let playerGuess = "";
+    for (let i = 0; i < 5; i++) {
+        playerGuess = playerGuess + currentRowBoxes[i].innerText;
+    }   console.log("Player guessed:", playerGuess);
+    console.log("Secret word:", secretWord);
+    
+    // Check each letter and add colors
+    for (let i = 0; i < 5; i++) {
+        let guessedLetter = playerGuess[i];
+        let correctLetter = secretWord[i];
+        
+        if (guessedLetter === correctLetter) {
+            // Right letter, right place = GREEN
+            currentRowBoxes[i].style.backgroundColor = "green";
+            currentRowBoxes[i].style.color = "white";
+        } else if (secretWord.includes(guessedLetter)) {
+            // Right letter, wrong place = YELLOW
+            currentRowBoxes[i].style.backgroundColor = "yellow";
+            currentRowBoxes[i].style.color = "black";
+        } else {
+            // Letter not in word = GRAY
+            currentRowBoxes[i].style.backgroundColor = "gray";
+            currentRowBoxes[i].style.color = "white";
+        }
+    }
+
+    // Check if they won
+    if (playerGuess === secretWord) {
+        alert("You won! The word was " + secretWord);
+    }  
+
+}
