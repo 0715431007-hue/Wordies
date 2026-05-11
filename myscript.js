@@ -29,7 +29,12 @@ ConsonantButton.addEventListener("click", showConsonantGame);
 closeButton.addEventListener("click", hidePopup);
 
 // Array of possible words
-let wordList = ["APPLE", "BEACH", "CRANE", "DREAM", "EAGLE", "FLAME", "GRAPE", "HORSE", "IMAGE", "JUICE", "BORED", "BOARD", "HATER", "LATER", "FIGHT"];
+let wordList = [
+    "APPLE", "BEACH", "CRANE", "DREAM", "EAGLE", "FLAME", "GRAPE", "HORSE", "IMAGE", "JUICE", "BORED", "BOARD", "HATER", "LATER", "FIGHT", "READS", "FEETS", "MUSIC", "YACHT", "HAPPY",
+    "WATER", "CUTIE", "FRUIT", "TACOS", "DIZZY", "JOKES", "JUDGE", "PLOTS", "FUZZY", "ENJOY", "PUPPY", "QUOTE", "CHUNK", "GUPPY", "SNACK", "BRICK", "HEXED", "HOBBY", "HOPPY", "JADES",
+    "JAILS", "BUMPY", "LUMPY", "MIXER", "MIXES", "QUIET", "SKUNK", "SKULL", "WITCH", "WHICH", "THANK", "FAKER", "LOVER", "ZONES", "BENCH", "CRAMP", "BOMBS", "IMPLY", "ENTER", "LUNCH",
+    "NIGHT", "HUNCH", "QUICK", "LOUDS", "FOXES", "BREAD", "CRAZY", "ANGRY", 
+];
 
 
 // Game variables
@@ -193,6 +198,7 @@ function checkGuess() {
                         keyButton.style.color = "black";
                     }
                 }
+                // break stops the code immediately after it runs for all the letter boxes that checks what letter is in the correct syntax for the secret word
                 break;
             }
         }
@@ -216,7 +222,7 @@ function showVowelGame() {
         num2 = Math.floor(Math.random() * 20) + 1;
         correctAnswer = num1 + num2;
     } else if (randomOperation === '-') {
-        num1 = Math.floor(Math.random() * 20) + 10; // Make sure num1 is bigger
+        num1 = Math.floor(Math.random() * 20) + 10;
         num2 = Math.floor(Math.random() * 10) + 1;
         correctAnswer = num1 - num2;
     } else if (randomOperation === '*') {

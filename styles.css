@@ -13,34 +13,12 @@ body {
 
 header {
     background: white;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #667eea;
-    font-weight: bold;
-}
-
-.mini-games-btn {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.mini-games-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    color: rgb(162, 136, 198);
+    font-size: 50px;
 }
 
 .game-container {
