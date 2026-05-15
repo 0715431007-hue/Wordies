@@ -16,6 +16,11 @@ let currentPosition = 0;
 // player guess currently empty
 let playerGuess = "";
 
+// Track which hints have been used
+let vowelHintUsed = false;
+let letterHintUsed = false;
+let consonantHintUsed = false;
+
 function hidePopup() {
     popup.style.display = "none";
 }
@@ -78,21 +83,26 @@ function addLetter(letter) {
         alert("You won! The word was " + secretWord);
     }
 
-// Function for ENTER button - now includes checking
+// Function for ENTER button - updated to refresh after game over
 function submitGuess() {
     if (currentPosition === 5) {
-        checkGuess();  // Check the guess and add colors
+        checkGuess();
         currentRow = currentRow + 1;
         currentPosition = 0;
+        
+        // Check if game is over after this guess
         if (currentRow >= 6) {
             // They used all 6 guesses - show the answer
             alert("Game Over! The word was: " + secretWord);
+            location.reload(); // Refresh the page
         }
+        
         console.log("Moving to row:", currentRow);
     } else {
         console.log("Need 5 letters before submitting!");
     }
 }
+
 // Function for DELETE button
 function deleteLetter() {
     if (currentPosition > 0) {
@@ -146,59 +156,77 @@ function checkGuess() {
     for (let i = 0; i < 5; i++) {
         playerGuess = playerGuess + currentRowBoxes[i].innerText;
     }
-
-    // prints player guess and secret word to the console 
+    
     console.log("Player guessed:", playerGuess);
     console.log("Secret word:", secretWord);
     
-    // Check each letter and add colors to boxes AND keyboard
+    // Track which letters in secret word have been used
+    let secretLetterUsed = [false, false, false, false, false];
+    let boxColors = ["", "", "", "", ""]; // Store what color each box should be
+    
+    // FIRST PASS: Mark all exact matches (green)
     for (let i = 0; i < 5; i++) {
-        let guessedLetter = playerGuess[i];
-        let correctLetter = secretWord[i];
-        
-        // Color the letter box
-        if (guessedLetter === correctLetter) {
-
-            // Right letter, right place = GREEN
+        if (playerGuess[i] === secretWord[i]) {
+            boxColors[i] = "green";
+            secretLetterUsed[i] = true;
+        }
+    }
+    
+    // SECOND PASS: Mark letters in wrong position (yellow)
+    for (let i = 0; i < 5; i++) {
+        if (boxColors[i] === "") { // Only check if not already green
+            let guessedLetter = playerGuess[i];
+            let foundMatch = false;
+            
+            // Look for this letter in secret word
+            for (let j = 0; j < 5; j++) {
+                if (secretWord[j] === guessedLetter && !secretLetterUsed[j]) {
+                    boxColors[i] = "yellow";
+                    secretLetterUsed[j] = true;
+                    foundMatch = true;
+                    break;
+                }
+            }
+            
+            if (!foundMatch) {
+                boxColors[i] = "gray";
+            }
+        }
+    }
+    
+    // Apply colors to boxes
+    for (let i = 0; i < 5; i++) {
+        if (boxColors[i] === "green") {
             currentRowBoxes[i].style.backgroundColor = "lightGreen";
             currentRowBoxes[i].style.color = "black";
-        } else if (secretWord.includes(guessedLetter)) {
-
-            // Right letter, wrong place = YELLOW
+        } else if (boxColors[i] === "yellow") {
             currentRowBoxes[i].style.backgroundColor = "yellow";
             currentRowBoxes[i].style.color = "black";
         } else {
-            // Letter not in word = GRAY
             currentRowBoxes[i].style.backgroundColor = "gray";
             currentRowBoxes[i].style.color = "black";
         }
         
         // Color the keyboard button for this letter
+        let guessedLetter = playerGuess[i];
         for (let j = 0; j < allKeyButtons.length; j++) {
             let keyButton = allKeyButtons[j];
-
-            // checks if the key buttons inner text is the correct
+            
             if (keyButton.innerText === guessedLetter) {
-                if (guessedLetter === correctLetter) {
-
-                    // Right letter, right place = GREEN
+                if (boxColors[i] === "lightGreen") {
                     keyButton.style.backgroundColor = "lightGreen";
                     keyButton.style.color = "black";
-                } else if (secretWord.includes(guessedLetter)) {
-
-                    // Right letter, wrong place = YELLOW (only if not already green)
+                } else if (boxColors[i] === "yellow") {
                     if (keyButton.style.backgroundColor !== "lightGreen") {
                         keyButton.style.backgroundColor = "yellow";
                         keyButton.style.color = "black";
                     }
                 } else {
-                    // Letter not in word = GRAY (only if not already green or yellow)
-                    if (keyButton.style.backgroundColor !== "green" && keyButton.style.backgroundColor !== "yellow") {
+                    if (keyButton.style.backgroundColor !== "lightGreen" && keyButton.style.backgroundColor !== "yellow") {
                         keyButton.style.backgroundColor = "gray";
                         keyButton.style.color = "black";
                     }
                 }
-                // break stops the code immediately after it runs for all the letter boxes that checks what letter is in the correct syntax for the secret word
                 break;
             }
         }
@@ -207,10 +235,19 @@ function checkGuess() {
     // Check if they won
     if (playerGuess === secretWord) {
         alert("You won! The word was " + secretWord);
+        location.reload(); // Refresh the page
     }
 }
 
+
+// Functions to show different minigames
 function showVowelGame() {
+    // Check if hint already used
+    if (vowelHintUsed) {
+        alert("You already used the vowel hint for this game!");
+        return;
+    }
+    
     // Pick a random math operation
     let operations = ['+', '-', '*', '/'];
     let randomOperation = operations[Math.floor(Math.random() * operations.length)];
@@ -230,7 +267,6 @@ function showVowelGame() {
         num2 = Math.floor(Math.random() * 10) + 1;
         correctAnswer = num1 * num2;
     } else if (randomOperation === '/') {
-        // Make sure division gives a whole number
         correctAnswer = Math.floor(Math.random() * 10) + 1;
         num2 = Math.floor(Math.random() * 5) + 1;
         num1 = correctAnswer * num2;
@@ -247,14 +283,17 @@ function showVowelGame() {
     
     popup.style.display = "block";
     
-    // Connect the submit button
     let vowelSubmitBtn = document.getElementById("vowelSubmit");
     vowelSubmitBtn.addEventListener("click", function() {
         let playerAnswer = document.getElementById("vowelAnswer").value;
         let resultArea = document.getElementById("vowelResult");
         
         if (parseInt(playerAnswer) === correctAnswer) {
-            // Find vowels in secret word
+            // ONLY mark as used when they get it RIGHT
+            vowelHintUsed = true;
+            vowelButton.style.backgroundColor = "#ccc";
+            vowelButton.style.cursor = "not-allowed";
+            
             let vowels = [];
             for (let i = 0; i < secretWord.length; i++) {
                 let letter = secretWord[i];
@@ -276,31 +315,31 @@ function showVowelGame() {
 }
 
 function showLetterGame() {
-    // List of words to scramble
+    // Check if hint already used
+    if (letterHintUsed) {
+        alert("You already used the letter hint for this game!");
+        return;
+    }
+    
     let wordsToScramble = ["GAMES", "MUSIC", "BOOKS", "PHONE", "WATER", "HAPPY", "SMILE", "DANCE", "MAGIC", "LIGHT"];
     
-    // Pick a random word
     let originalWord = wordsToScramble[Math.floor(Math.random() * wordsToScramble.length)];
     
-    // Function to scramble the word
     function scrambleWord(word) {
-        let letters = word.split(''); // Turn word into array of letters
+        let letters = word.split('');
         
-        // Shuffle the letters randomly
         for (let i = letters.length - 1; i > 0; i--) {
             let randomIndex = Math.floor(Math.random() * (i + 1));
-            // Swap letters
             let temp = letters[i];
             letters[i] = letters[randomIndex];
             letters[randomIndex] = temp;
         }
         
-        return letters.join(''); // Turn back into word
+        return letters.join('');
     }
     
     let scrambledWord = scrambleWord(originalWord);
     
-    // Make sure scrambled word is different from original
     while (scrambledWord === originalWord) {
         scrambledWord = scrambleWord(originalWord);
     }
@@ -322,21 +361,29 @@ function showLetterGame() {
         let resultArea = document.getElementById("letterResult");
         
         if (playerAnswer === originalWord) {
-            // Pick a random letter from secret word
+            // ONLY mark as used when they get it RIGHT
+            letterHintUsed = true;
+            letterButton.style.backgroundColor = "#ccc";
+            letterButton.style.cursor = "not-allowed";
+            
             let randomIndex = Math.floor(Math.random() * secretWord.length);
             let randomLetter = secretWord[randomIndex];
             resultArea.innerText = "Correct! A letter in the word is: " + randomLetter;
         } else {
-            resultArea.innerText = "Wrong answer! The correct word was: " + originalWord + ". Try again!";
+            resultArea.innerText = "Wrong answer! Try again.";
         }
     });
 }
 
 function showConsonantGame() {
-    // Picks a random number of dots between 5 and 15
+    // Check if hint already used
+    if (consonantHintUsed) {
+        alert("You already used the consonant hint for this game!");
+        return;
+    }
+    
     let numDots = Math.floor(Math.random() * 11) + 5;
     
-    // Creates the dots string
     let dots = "";
     for (let i = 0; i < numDots; i++) {
         dots = dots + "• ";
@@ -359,7 +406,11 @@ function showConsonantGame() {
         let resultArea = document.getElementById("consonantResult");
         
         if (parseInt(playerAnswer) === numDots) {
-            // Find consonants in secret word
+            // ONLY mark as used when they get it RIGHT
+            consonantHintUsed = true;
+            letterButton.style.backgroundColor = "#ccc";
+            letterButton.style.cursor = "not-allowed";
+            
             let consonants = [];
             for (let i = 0; i < secretWord.length; i++) {
                 let letter = secretWord[i];
@@ -369,19 +420,14 @@ function showConsonantGame() {
             }
             
             if (consonants.length > 0) {
-                // randomConsonant equals random consonant in the word
                 let randomConsonant = consonants[Math.floor(Math.random() * consonants.length)];
-                
-                // gives random consonant in word if you answer minigame correctly
                 resultArea.innerText = "Correct! A consonant in the word is: " + randomConsonant;
-
-                // if you get the minigame correct but there's no consonants in the word
             } else {
                 resultArea.innerText = "Correct! There are no consonants in this word.";
             }
-            // if you get the minigame incorrect it will show this message
         } else {
-            resultArea.innerText = "Wrong answer! There were " + numDots + " dots. Try again!";
+            resultArea.innerText = "Wrong answer! Try again.";
         }
     });
 }
+
